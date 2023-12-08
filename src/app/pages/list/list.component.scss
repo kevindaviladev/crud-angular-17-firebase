@@ -1,11 +1,10 @@
 .list {
   background-color: #1d90ce;
   min-height: 100vh;
-
+  padding: 2em;
   .content {
     border-radius: 8px;
     background-color: white;
-    margin: 2em;
     padding: 2em;
     display: flex;
     gap: 1em;
