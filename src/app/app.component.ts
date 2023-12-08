@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+
+interface Item {
+  name: string,
+};
 
 @Component({
   selector: 'app-root',
@@ -10,5 +16,11 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-crud-17-firebase';
+  item$: Observable<Item[]>;
+  firestore: Firestore = inject(Firestore);
+
+  constructor() {
+    const itemCollection = collection(this.firestore, 'items');
+    this.item$ = collectionData(itemCollection) as Observable<Item[]>;
+  }
 }

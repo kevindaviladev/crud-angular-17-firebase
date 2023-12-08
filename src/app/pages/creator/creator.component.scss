@@ -1,0 +1,35 @@
+.creator {
+  display: grid;
+  grid-template-columns: 1fr 16rem;
+  background-color: #1d90ce;
+  height: 100vh;
+
+  .content {
+    overflow: auto;
+    margin: 1.5em;
+    padding: 1em;
+    background-color: white;
+    border-radius: 8px;
+  }
+
+  .card-list {
+    margin: 1.5em;
+    overflow: auto;
+    .form-floating {
+      position: fixed;
+    }
+
+    .cards {
+      margin-top: 4em;
+
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

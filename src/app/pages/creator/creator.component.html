@@ -1,0 +1,31 @@
+<div class="creator">
+  <div class="content">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="deck-name" />
+      <label for="deck-name">Deck name</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="deck-name" />
+      <label for="deck-name">Deck description</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="deck-name" />
+      <label for="deck-name">Author</label>
+    </div>
+  </div>
+  <div class="card-list">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="search-card" />
+      <label for="search-card">Search card</label>
+    </div>
+    <div class="cards">
+      <img
+        src="https://images.ygoprodeck.com/images/cards/34541863.jpg"
+        *ngFor="let item of [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3]"
+        alt=""
+      />
+    </div>
+  </div>
+</div>
