@@ -1,31 +1,62 @@
 <div class="creator">
-  <div class="content">
+  <div class="content" [formGroup]="form">
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="deck-name" />
+      <input
+        type="text"
+        class="form-control"
+        id="deck-name"
+        formControlName="name"
+      />
       <label for="deck-name">Deck name</label>
     </div>
 
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="deck-name" />
+      <input
+        type="text"
+        class="form-control"
+        id="deck-name"
+        formControlName="description"
+      />
       <label for="deck-name">Deck description</label>
     </div>
 
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="deck-name" />
+      <input
+        type="text"
+        class="form-control"
+        id="deck-name"
+        formControlName="author"
+      />
       <label for="deck-name">Author</label>
+    </div>
+
+    <div class="new-deck">
+      @for (card of form.get('deck')?.value; track $index) {
+      <img [src]="card" [alt]="card" />
+      }
     </div>
   </div>
   <div class="card-list">
+    <button type="button" class="btn btn-primary" (click)="saveDeck()">
+      Guardar
+    </button>
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="search-card" />
+      <input
+        type="text"
+        class="form-control"
+        id="search-card"
+        [formControl]="search"
+      />
       <label for="search-card">Search card</label>
     </div>
     <div class="cards">
+      @for (card of cards$ | async; track card) {
       <img
-        src="https://images.ygoprodeck.com/images/cards/34541863.jpg"
-        *ngFor="let item of [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3]"
-        alt=""
+        [src]="card.card_images[0].image_url"
+        [alt]="card.name"
+        (click)="addCard(card)"
       />
+      }
     </div>
   </div>
 </div>

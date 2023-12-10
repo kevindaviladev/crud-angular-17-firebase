@@ -1,14 +1,14 @@
 <div class="detail">
   <div class="content">
-    <p class="fs-1">Deck name</p>
-    <p class="fs-4">Deck description</p>
-    <p class="fs-6">Author</p>
+    @if(deck$ | async; as deck){
+    <p class="fs-1">{{ deck.name }}</p>
+    <p class="fs-4">{{ deck.description }}</p>
+    <p class="fs-6">{{ deck.author }}</p>
     <div class="cards">
-      <img
-        src="https://images.ygoprodeck.com/images/cards/34541863.jpg"
-        *ngFor="let item of [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3]"
-        alt=""
-      />
+      @for (card of deck.deck; track $index) {
+      <img [src]="card" [alt]="card" />
+      }
     </div>
+    }
   </div>
 </div>

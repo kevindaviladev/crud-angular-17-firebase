@@ -1,22 +1,24 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe, JsonPipe, NgFor } from '@angular/common';
 import { CardService } from '../../services/card.service';
+import { DeckService } from '../../services/deck.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, debounceTime } from 'rxjs';
 import { Card } from '../../models/card.interface';
-import { DeckService } from '../../services/deck.service';
 import { Deck } from '../../models/deck.interface';
+import { AsyncPipe } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-creator',
+  selector: 'app-edit',
   standalone: true,
-  imports: [AsyncPipe, ReactiveFormsModule, JsonPipe],
-  templateUrl: './creator.component.html',
-  styleUrl: './creator.component.scss',
+  imports: [ReactiveFormsModule, AsyncPipe],
+  templateUrl: './edit.component.html',
+  styleUrl: './edit.component.scss',
 })
-export class CreatorComponent {
+export class EditComponent {
   private readonly cardService = inject(CardService);
   private readonly deckService = inject(DeckService);
+  private readonly activatedRoute = inject(ActivatedRoute);
 
   form = new FormGroup({
     name: new FormControl(''),
@@ -28,7 +30,14 @@ export class CreatorComponent {
   search = new FormControl('');
   cards$!: Observable<Card[]>;
 
+  id!: string;
   ngOnInit() {
+    this.id = this.activatedRoute.snapshot.params['id'];
+
+    this.deckService
+      .getDeck(this.id)
+      .subscribe((data) => this.form.patchValue(data));
+
     this.search.valueChanges.pipe(debounceTime(1000)).subscribe((res) => {
       if (res) {
         this.cards$ = this.cardService.getCards(res);
@@ -47,9 +56,12 @@ export class CreatorComponent {
     ]);
   }
 
-  saveDeck() {
-    this.deckService
-      .addDeck(this.form.value as Deck)
-      .subscribe((res) => console.log(res));
+  removeCard(card: string) {
+    const updatedDeck = this.form.controls.deck.value.filter((c) => c !== card);
+    this.form.controls.deck.setValue(updatedDeck);
+  }
+
+  updateDeck() {
+    this.deckService.updateDeck(this.form.value as Deck, this.id);
   }
 }

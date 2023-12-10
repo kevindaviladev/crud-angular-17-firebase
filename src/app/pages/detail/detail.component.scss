@@ -9,12 +9,13 @@
     border-radius: 8px;
 
     .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 10px;
- 
-      img{
+
+      img {
         width: 100%;
+        max-width: 260px;
       }
     }
   }

@@ -10,6 +10,15 @@
     padding: 1em;
     background-color: white;
     border-radius: 8px;
+
+    .new-deck {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      img {
+        max-width: 260px;
+      } 
+    }
   }
 
   .card-list {
@@ -25,7 +34,6 @@
       display: flex;
       flex-direction: column;
       gap: 1em;
-
 
       img {
         width: 100%;
