@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { CardService } from '../../services/card.service';
 import { NgFor } from '@angular/common';
 
 @Component({
@@ -10,6 +9,5 @@ import { NgFor } from '@angular/common';
   styleUrl: './creator.component.scss',
 })
 export class CreatorComponent {
-  private readonly cardService = inject(CardService);
-  cards$ = this.cardService.getCards();
+
 }
